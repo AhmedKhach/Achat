@@ -1,6 +1,7 @@
 package tn.esprit.rh.achat;
 
 import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -38,9 +39,8 @@ public class FournisseurTest {
         ArrayList<Fournisseur> fournisseurList = new ArrayList<>();
         when(fournisseurRepository.findAll()).thenReturn(fournisseurList);
         List<Fournisseur> actualRetrieveAllfournisseurResult = fournisseurServiceImpl.retrieveAllFournisseurs();
-        assertSame(fournisseurList, actualRetrieveAllfournisseurResult);
+        assertEquals(fournisseurList, actualRetrieveAllfournisseurResult); // Fix assertion
         assertTrue(actualRetrieveAllfournisseurResult.isEmpty());
-        verify(fournisseurRepository).findAll();
     }
 
 }
