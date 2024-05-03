@@ -34,6 +34,8 @@ import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 @RunWith( SpringRunner.class)
@@ -42,38 +44,38 @@ public class MockitoTest {
 
     private StockServiceImpl service;
     private StockRepository repository;
-//    private MockMvc mockMvc;
-//    ObjectMapper objectMapper = new ObjectMapper();
-//    ObjectWriter objectWriter = objectMapper.writer();
-//@Mock
-// private StockRepository stockRepository;
-//@InjectMocks
-//    private StockRestController stockRestController;
-//
-//    long id1 = java.util.UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-//    long id2 = java.util.UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-//    long id3 = java.util.UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-//    Stock RECORD_1 = new Stock(id1,"alimentaire",50,5);
-//    Stock RECORD_2 = new Stock(id2,"électro",100,20);
-//    Stock RECORD_3 = new Stock(id3,"vestimentaire",150,10);
-//@Before
-//    public void setUp(){
-//    MockitoAnnotations.initMocks(this);
-//    this.mockMvc = MockMvcBuilders.standaloneSetup(stockRestController).build();
-//
-//   }
-//@Test
-////    public void getAllRecords_success()throws Exception{
-//
-//    List<Stock> records = new ArrayList<>(Arrays.asList(RECORD_1,RECORD_2,RECORD_3));
-//    Mockito.when(stockRepository.findAll()).thenReturn(records);
-//    mockMvc.perform(MockMvcRequestBuilders
-//            .get("/retrieve-all-stocks")
-//            .contentType(MediaType.APPLICATION_JSON))
-//            .andExpect(status().isOk())
-//            .andExpect(MockMvcResultMatchers.jsonPath("$",hasSize(3)))
-//            .andExpect((ResultMatcher) jsonPath("$[2].libelleStock", is("alimentaire")));
-//}
+    private MockMvc mockMvc;
+    ObjectMapper objectMapper = new ObjectMapper();
+    ObjectWriter objectWriter = objectMapper.writer();
+@Mock
+ private StockRepository stockRepository;
+@InjectMocks
+    private StockRestController stockRestController;
+
+    long id1 = java.util.UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+    long id2 = java.util.UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+    long id3 = java.util.UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+    Stock RECORD_1 = new Stock(id1,"alimentaire",50,5);
+    Stock RECORD_2 = new Stock(id2,"électro",100,20);
+    Stock RECORD_3 = new Stock(id3,"vestimentaire",150,10);
+@Before
+    public void setUp(){
+    MockitoAnnotations.initMocks(this);
+    this.mockMvc = MockMvcBuilders.standaloneSetup(stockRestController).build();
+
+   }
+@Test
+   public void getAllRecords_success()throws Exception{
+
+    List<Stock> records = new ArrayList<>(Arrays.asList(RECORD_1,RECORD_2,RECORD_3));
+    Mockito.when(stockRepository.findAll()).thenReturn(records);
+    mockMvc.perform(MockMvcRequestBuilders
+            .get("/retrieve-all-stocks")
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(MockMvcResultMatchers.jsonPath("$",hasSize(3)))
+            .andExpect((ResultMatcher) jsonPath("$[2].libelleStock", is("alimentaire")));
+}
 
     @Test
     public void getStockTest(){
