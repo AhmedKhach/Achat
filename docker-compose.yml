@@ -3,8 +3,6 @@ version: '3.8'
 services:
   mysqldb:
     image: mysql:5.7
-    networks:
-      - my-network
     restart: unless-stopped
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: yes
@@ -17,8 +15,6 @@ services:
 
   app-achat:
     image: haythemarfaoui69/achat-devops:1.0.0
-    networks:
-      - my-network
     restart: on-failure
     ports:
       - "8082:8082"
@@ -26,7 +22,7 @@ services:
       - mysqldb
     environment:
       SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url" : "jdbc:mysql://mysqldb:3306/achatdb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+        "spring.datasource.url" : "jdbc:mysql://192.168.50.4:3306/achatdb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
         "spring.datasource.username" : "root",
         "spring.datasource.password" : "root",
         "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5InnoDBDialect",
