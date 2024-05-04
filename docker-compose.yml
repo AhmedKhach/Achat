@@ -3,8 +3,11 @@ version: '3.8'
 services:
   mysqldb:
     image: mysql:5.7
+    networks:
+      - my-network
     restart: unless-stopped
     environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: achatdb
     ports:
@@ -14,6 +17,8 @@ services:
 
   app-achat:
     image: haythemarfaoui69/achat-devops:1.0.0
+    networks:
+      - my-network
     restart: on-failure
     ports:
       - "8082:8082"
